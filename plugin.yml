@@ -1,0 +1,10 @@
+name: TCommandBlocker
+main: minealex.tcommandblocker.CommandBlocker
+version: 1.0
+api-version: 1.8
+
+commands:
+  tcommandblocker:
+    description: Reload the CommandBlocker config
+    usage: /<command>
+    permission: tcommandblocker.reload
