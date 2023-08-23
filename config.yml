@@ -7,3 +7,4 @@ messages:
   blocked-command: "&5TCommandBlocker &e> &cYou do not have permission to execute this command."
   config-reloaded: "&5TCommandBlocker &e> &aConfiguration reloaded correctly."
   no-permission-message: "&5TCommandBlocker &e> &cYou do not have permission to use this command."
+  version-message: "&5TCommandBlocker &e> &aVersion: &b{version}"

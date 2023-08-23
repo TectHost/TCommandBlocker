@@ -34,16 +34,28 @@ public class CommandBlocker extends JavaPlugin implements CommandExecutor, Liste
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
         if (cmd.getName().equalsIgnoreCase("tcommandblocker")) {
-            if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-                if (sender.hasPermission("tcommandblocker.reload")) {
-                    reloadConfig();
-                    loadConfig();
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', configReloadedMessage));
-                } else {
-                    String noPermissionMessage = config.getString("messages.no-permission-message", "&5TCommandBlocker &e> &cYou do not have permission to use this command.");
-                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', noPermissionMessage));
+            if (args.length == 1) {
+                if (args[0].equalsIgnoreCase("reload")) {
+                    if (sender.hasPermission("tcommandblocker.reload")) {
+                        reloadConfig();
+                        loadConfig();
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', configReloadedMessage));
+                    } else {
+                        String noPermissionMessage = config.getString("messages.no-permission-message", "&5TCommandBlocker &e> &cYou do not have permission to use this command.");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', noPermissionMessage));
+                    }
+                    return true;
+                } else if (args[0].equalsIgnoreCase("version")) {
+                    if (sender.hasPermission("tcommandblocker.version")) {
+                        String version = getDescription().getVersion();
+                        String versionMessage = config.getString("messages.version-message", "&5TCommandBlocker &e> &aVersion: &b" + version);
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', versionMessage));
+                    } else {
+                        String noPermissionMessage = config.getString("messages.no-permission-message", "&5TCommandBlocker &e> &cYou do not have permission to use this command.");
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', noPermissionMessage));
+                    }
+                    return true;
                 }
-                return true;
             }
         }
         return false;
@@ -70,6 +82,7 @@ public class CommandBlocker extends JavaPlugin implements CommandExecutor, Liste
         blockedCommands = config.getStringList("blocked-commands");
         blockedCommands.replaceAll(command -> command.toLowerCase()); // Ensure all blocked commands are lowercase
         config.addDefault("messages.no-permission-message", defaultNoPermissionMessage);
+        config.addDefault("messages.version-message", "&5TCommandBlocker &e> &aVersion: &b{version}");
         config.options().copyDefaults(true);
         saveConfig();
     }
