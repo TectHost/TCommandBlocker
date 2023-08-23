@@ -8,9 +8,11 @@ Simple command blocker plugin
 
 # Commands
 - /tcommandblocker reload
+- /tcommandblocker version
   
 # Permissions
 - tcommandblocker.reload
+- tcommandblocker.version
 
 # Dependencies
 - None
